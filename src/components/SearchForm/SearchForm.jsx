@@ -1,7 +1,8 @@
 import { useId } from "react";
 import style from "./SearchForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectFilter, setFilter } from "../../redux/filtersSlice";
+import { setFilter } from "../../redux/filters/slice";
+import { selectFilter } from "../../redux/filters/selectors";
 
 function SearchForm() {
 	const dispatch = useDispatch();
