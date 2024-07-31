@@ -8,11 +8,12 @@ import { refreshUser } from "./redux/auth/operations";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import RestrictedRoute from "./components/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute";
+import { CircularProgress } from "@mui/material";
 
-const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
-const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
-const ContactsPage = lazy(() => import("./pages/ContactsPage/ContactsPage"));
+const HomePage = lazy(() => import("./pages/HomePage"));
+const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const LoginPage = lazy(() => import("./pages/LoginPage"));
+const ContactsPage = lazy(() => import("./pages/ContactsPage"));
 
 function App() {
 	const isRefreshing = useSelector(selectIsRefreshing);
@@ -23,7 +24,7 @@ function App() {
 	}, [dispatch]);
 
 	return isRefreshing ? (
-		<p>Refreshing user, please wait... </p>
+		<CircularProgress />
 	) : (
 		<Layout>
 			<Routes>

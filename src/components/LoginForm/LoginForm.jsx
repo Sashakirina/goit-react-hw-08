@@ -14,20 +14,14 @@ function LoginForm() {
 		},
 		validationSchema: validationLogin,
 		onSubmit: (values) => {
-			console.log(values);
 			dispatch(login(values));
-			console.log("Form Submitted:", values);
 		},
 	});
 
 	return (
 		<Box
 			component="form"
-			onSubmit={(e) => {
-				e.preventDefault();
-				console.log("submit");
-				formik.handleSubmit(e);
-			}}
+			onSubmit={formik.handleSubmit}
 			sx={{
 				display: "flex",
 				flexDirection: "column",

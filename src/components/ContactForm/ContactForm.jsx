@@ -2,7 +2,7 @@ import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import { validationContacts } from "../../validation/validation";
-import { Box, Button, TextField, Typography } from "@mui/material";
+import { Box, Button, TextField } from "@mui/material";
 
 function ContactForm() {
 	const dispatch = useDispatch();
@@ -29,7 +29,6 @@ function ContactForm() {
 				alignItems: "center",
 				gap: 2,
 			}}>
-			<Typography>Add new contact</Typography>
 			<TextField
 				fullWidth
 				id="name"
