@@ -1,71 +1,62 @@
-import { Formik, Form, Field, ErrorMessage } from "formik";
-import { useId } from "react";
-import style from "./ContactForm.module.css";
-import * as Yup from "yup";
+import { useFormik } from "formik";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
-
-const validationSchema = Yup.object().shape({
-	name: Yup.string("")
-		.min(3, "Need to be min 3 symbols!")
-		.max(50, "Need to be max 50 symbols!")
-		.required("This field is required!"),
-	number: Yup.string("")
-		.min(3, "Need to be min 3 symbols!")
-		.max(50, "Need to be max 50 symbols!")
-		.required("This field is required!"),
-});
+import { validationContacts } from "../../validation/validation";
+import { Box, Button, TextField, Typography } from "@mui/material";
 
 function ContactForm() {
 	const dispatch = useDispatch();
-	const nameId = useId();
-	const phoneId = useId();
 
-	const initialValues = {
-		name: "",
-		number: "",
-	};
-
-	const handleSubmit = (value, action) => {
-		dispatch(addContact({ name: value.name, number: value.number }));
-		action.resetForm();
-	};
+	const formik = useFormik({
+		initialValues: {
+			name: "",
+			number: "",
+		},
+		validationSchema: validationContacts,
+		onSubmit: (values, action) => {
+			dispatch(addContact(values));
+			action.resetForm();
+		},
+	});
 
 	return (
-		<Formik
-			initialValues={initialValues}
-			onSubmit={handleSubmit}
-			validationSchema={validationSchema}>
-			<Form className={style.form}>
-				<label htmlFor={nameId}>Name</label>
-				<Field
-					type="text"
-					name="name"
-					id={nameId}
-					required
-					className={style.input}
-				/>
-				<ErrorMessage
-					name="name"
-					component="span"
-					className={style.inputError}
-				/>
-				<label htmlFor={phoneId}>Phone</label>
-				<Field
-					type="tel"
-					name="number"
-					id={phoneId}
-					required
-					className={style.input}
-				/>
-				<ErrorMessage
-					name="number"
-					component="span"
-					className={style.inputError}
-				/>
-				<button type="submit">Add contact</button>
-			</Form>
-		</Formik>
+		<Box
+			component="form"
+			onSubmit={formik.handleSubmit}
+			sx={{
+				display: "flex",
+				flexDirection: "column",
+				alignItems: "center",
+				gap: 2,
+			}}>
+			<Typography>Add new contact</Typography>
+			<TextField
+				fullWidth
+				id="name"
+				name="name"
+				label="Name"
+				value={formik.values.name}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+				error={formik.touched.name && Boolean(formik.errors.name)}
+				helperText={formik.touched.name && formik.errors.name}
+			/>
+			<TextField
+				fullWidth
+				id="number"
+				name="number"
+				label="Number"
+				value={formik.values.number}
+				onChange={formik.handleChange}
+				onBlur={formik.handleBlur}
+				error={formik.touched.number && Boolean(formik.errors.number)}
+				helperText={formik.touched.number && formik.errors.number}
+			/>
+
+			<Button fullWidth color="primary" variant="contained" type="submit">
+				Add
+			</Button>
+		</Box>
 	);
 }
 

@@ -1,16 +1,23 @@
 import ContactForm from "../../components/ContactForm/ContactForm";
 import SearchForm from "../../components/SearchForm/SearchForm";
 import ContactList from "../../components/ContactList/ContactList";
+import { Box, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../redux/auth/selectors";
 
 function ContactsPage() {
-	console.log("contacts");
+	const user = useSelector(selectUser);
+
 	return (
-		<div>
-			<h1>Phonebook</h1>
-			<ContactForm />
-			<SearchForm />
+		<Box>
+			<Box sx={{ mb: 2 }}>
+				<Typography align="right">Welcome, {user.name}</Typography>
+
+				<ContactForm />
+				<SearchForm />
+			</Box>
 			<ContactList />
-		</div>
+		</Box>
 	);
 }
 

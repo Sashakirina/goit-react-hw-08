@@ -1,27 +1,33 @@
-import { useId } from "react";
-import style from "./SearchForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilter } from "../../redux/filters/slice";
 import { selectFilter } from "../../redux/filters/selectors";
+import { Box, TextField } from "@mui/material";
+import { useFormik } from "formik";
 
 function SearchForm() {
 	const dispatch = useDispatch();
 	const filter = useSelector(selectFilter);
 
-	const queryId = useId();
+	const formik = useFormik({
+		initialValues: {
+			query: "",
+		},
+	});
 
 	return (
-		<div className={style.container}>
-			<label htmlFor={queryId}>Search</label>
-			<input
-				className={style.search}
-				type="text"
+		<Box sx={{ mt: 2 }}>
+			<TextField
+				fullWidth
 				name="query"
-				id={queryId}
+				id="query"
+				label="Search"
 				value={filter}
-				onChange={(evt) => dispatch(setFilter(evt.target.value))}
+				onChange={(e) => {
+					dispatch(setFilter(e.target.value));
+				}}
+				onBlur={formik.handleBlur}
 			/>
-		</div>
+		</Box>
 	);
 }
 

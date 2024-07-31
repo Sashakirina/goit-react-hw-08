@@ -1,10 +1,10 @@
-import { NavLink } from "react-router-dom";
+import { Button } from "@mui/material";
 
 function AuthNav() {
 	return (
 		<nav>
-			<NavLink to="/register">Register</NavLink>
-			<NavLink to="/login">Log In</NavLink>
+			<Button href="/register">Register</Button>
+			<Button href="/login">Log In</Button>
 		</nav>
 	);
 }
