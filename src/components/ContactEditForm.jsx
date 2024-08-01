@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { updateContact } from "../redux/contacts/operations";
 import { useState } from "react";
 
-function ContactEditForm({ name, number, id }) {
+function ContactEditForm({ name, number, id, onClose }) {
 	const [newName, setName] = useState(name);
 	const [newNumber, setNumber] = useState(number);
 	const dispatch = useDispatch();
@@ -14,7 +14,10 @@ function ContactEditForm({ name, number, id }) {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		console.log(newName);
-		dispatch(updateContact(id, { name: newName, number: newNumber }));
+		console.log(id);
+		dispatch(updateContact({ id, name: newName, number: newNumber }))
+			.unwrap()
+			.then(() => onClose());
 	};
 
 	return (

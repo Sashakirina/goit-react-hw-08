@@ -56,7 +56,6 @@ const contactsSlice = createSlice({
 			})
 			.addCase(updateContact.fulfilled, (state, { payload }) => {
 				state.loading = false;
-				state.items.push(payload);
 			});
 	},
 });

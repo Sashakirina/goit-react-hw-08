@@ -18,7 +18,12 @@ function Contact({ name, number, id }) {
 	return (
 		<Paper sx={{ p: 2, w: "inherit", mb: 2 }}>
 			{isEditing ? (
-				<ContactEditForm name={name} number={number} id={id} />
+				<ContactEditForm
+					name={name}
+					number={number}
+					id={id}
+					onClose={() => setIsEditing(false)}
+				/>
 			) : (
 				<Box>
 					<Box
