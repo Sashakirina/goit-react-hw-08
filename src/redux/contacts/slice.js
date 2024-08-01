@@ -5,6 +5,7 @@ import {
 	deleteContact,
 	updateContact,
 } from "./operations";
+import { logout } from "../auth/operations";
 
 const contactsSlice = createSlice({
 	name: "contacts",
@@ -56,6 +57,13 @@ const contactsSlice = createSlice({
 			})
 			.addCase(updateContact.fulfilled, (state, { payload }) => {
 				state.loading = false;
+				const contactIndex = state.items.findIndex(
+					(item) => item.id === payload.id
+				);
+				state.items[contactIndex] = payload;
+			})
+			.addCase(logout.fulfilled, (state) => {
+				state.items = [];
 			});
 	},
 });
