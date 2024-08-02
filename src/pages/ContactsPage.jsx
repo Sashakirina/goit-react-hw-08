@@ -1,12 +1,17 @@
 import ContactForm from "../components/ContactForm/ContactForm";
-import SearchForm from "../components/SearchForm/SearchForm";
+import SearchBox from "../components/SearchForm/SearchForm";
 import ContactList from "../components/ContactList/ContactList";
 import { Box, Typography } from "@mui/material";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../redux/auth/selectors";
+import { useEffect } from "react";
+import { fetchContacts } from "../redux/contacts/operations";
 
 function ContactsPage() {
+	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
+
+	useEffect(() => dispatch(fetchContacts()), [dispatch]);
 
 	return (
 		<Box>
@@ -14,7 +19,7 @@ function ContactsPage() {
 				<Typography align="right">Welcome, {user.name}</Typography>
 
 				<ContactForm />
-				<SearchForm />
+				<SearchBox />
 			</Box>
 			<ContactList />
 		</Box>

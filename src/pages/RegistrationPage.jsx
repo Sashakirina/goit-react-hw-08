@@ -1,5 +1,5 @@
 import { Box, Typography } from "@mui/material";
-import RegisterForm from "../components/RegisterForm/RegisterForm";
+import RegistrationForm from "../components/RegisterForm/RegisterForm";
 
 function RegisterPage() {
 	return (
@@ -7,7 +7,7 @@ function RegisterPage() {
 			<Typography component="h1" variant="h5" sx={{ mb: 2 }}>
 				Register
 			</Typography>
-			<RegisterForm />
+			<RegistrationForm />
 		</Box>
 	);
 }
