@@ -11,7 +11,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import { CircularProgress } from "@mui/material";
 
 const HomePage = lazy(() => import("./pages/HomePage"));
-const RegisterPage = lazy(() => import("./pages/RegisterPage"));
+const RegistrationPage = lazy(() => import("./pages/RegistrationPage"));
 const LoginPage = lazy(() => import("./pages/LoginPage"));
 const ContactsPage = lazy(() => import("./pages/ContactsPage"));
 
@@ -31,7 +31,7 @@ function App() {
 				<Route path="/" element={<HomePage />} />
 				<Route
 					path="/register"
-					element={<RestrictedRoute component={<RegisterPage />} />}
+					element={<RestrictedRoute component={<RegistrationPage />} />}
 				/>
 				<Route
 					path="/login"
