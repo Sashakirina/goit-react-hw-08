@@ -13,8 +13,6 @@ function ContactEditForm({ name, number, id, onClose }) {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		console.log(newName);
-		console.log(id);
 		dispatch(updateContact({ id, name: newName, number: newNumber }))
 			.unwrap()
 			.then(() => onClose());

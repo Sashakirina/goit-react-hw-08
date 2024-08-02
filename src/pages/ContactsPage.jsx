@@ -1,5 +1,5 @@
 import ContactForm from "../components/ContactForm/ContactForm";
-import SearchBox from "../components/SearchForm/SearchForm";
+import SearchBox from "../components/SearchBox/SearchBox";
 import ContactList from "../components/ContactList/ContactList";
 import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,7 +11,9 @@ function ContactsPage() {
 	const dispatch = useDispatch();
 	const user = useSelector(selectUser);
 
-	useEffect(() => dispatch(fetchContacts()), [dispatch]);
+	useEffect(() => {
+		dispatch(fetchContacts());
+	}, [dispatch]);
 
 	return (
 		<Box>

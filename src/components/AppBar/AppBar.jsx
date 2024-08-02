@@ -7,7 +7,6 @@ import { Box, Toolbar } from "@mui/material";
 
 function AppBar() {
 	const isLoggedIn = useSelector(selectIsLoggedIn);
-	console.log(isLoggedIn);
 
 	return (
 		<Box>
